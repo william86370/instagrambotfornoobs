@@ -14,19 +14,31 @@ from unfollow_protocol import unfollow_protocol
 
 bot = InstaBot(
     login="username",
+               #instagram username
     password="password",
+               #instagram password
     like_per_day=1000,
+               #total amount of likes the bot will do per day
     comments_per_day=0,
+               #amount of comments the bot will post per day
     tag_list=['follow4follow', 'f4f', 'cute'],
+               #hashtasgs that the bot will usde to like,follow accounts
     tag_blacklist=['rain', 'thunderstorm'],
+               # will not like the posts with these tags
     user_blacklist={},
     max_like_for_one_tag=50,
+               #the amount of likes the bot will do per hashtag
     follow_per_day=300,
+               #total amount of accounts the bot will follow per day
     follow_time=1 * 60,
+               #the amout of time the bot will follow an account in seconds ex 60*1 is 1 min
     unfollow_per_day=300,
+               #the amount of accounts the bot will unfollow per day
     unfollow_break_min=15,
     unfollow_break_max=30,
+               #how long the bot will wait boefore doing rounds of unfollowing
     log_mod=0,
+               #log 0 is for concel, log 1 is for file
     proxy='',
     # Use unwanted_username_list to block usernames containing a string
     ## Will do partial matches; i.e. 'mozart' will block 'legend_mozart'
@@ -41,62 +53,6 @@ bot = InstaBot(
         'follow', 'follower', 'gain', '.id', '_id', 'bags'
     ],
     unfollow_whitelist=['example_user_1', 'example_user_2'])
-while True:
-
-    #print("# MODE 0 = ORIGINAL MODE BY LEVPASHA")
-    #print("## MODE 1 = MODIFIED MODE BY KEMONG")
-    #print("### MODE 2 = ORIGINAL MODE + UNFOLLOW WHO DON'T FOLLOW BACK")
-    #print("#### MODE 3 = MODIFIED MODE : UNFOLLOW USERS WHO DON'T FOLLOW YOU BASED ON RECENT FEED")
-    #print("##### MODE 4 = MODIFIED MODE : FOLLOW USERS BASED ON RECENT FEED ONLY")
-    #print("###### MODE 5 = MODIFIED MODE : JUST UNFOLLOW EVERYBODY, EITHER YOUR FOLLOWER OR NOT")
-
-    ################################
-    ##  WARNING   ###
-    ################################
-
-    # DON'T USE MODE 5 FOR A LONG PERIOD. YOU RISK YOUR ACCOUNT FROM GETTING BANNED
-    ## USE MODE 5 IN BURST MODE, USE IT TO UNFOLLOW PEOPLE AS MANY AS YOU WANT IN SHORT TIME PERIOD
-
     mode = 0
-
-    #print("You choose mode : %i" %(mode))
-    #print("CTRL + C to cancel this operation or wait 30 seconds to start")
-    #time.sleep(30)
-
-    if mode == 0:
-        bot.new_auto_mod()
-
-    elif mode == 1:
-        check_status(bot)
-        while bot.self_following - bot.self_follower > 200:
-            unfollow_protocol(bot)
-            time.sleep(10 * 60)
-            check_status(bot)
-        while bot.self_following - bot.self_follower < 400:
-            while len(bot.user_info_list) < 50:
-                feed_scanner(bot)
-                time.sleep(5 * 60)
-                follow_protocol(bot)
-                time.sleep(10 * 60)
-                check_status(bot)
-
-    elif mode == 2:
-        bot.bot_mode = 1
-        bot.new_auto_mod()
-
-    elif mode == 3:
-        unfollow_protocol(bot)
-        time.sleep(10 * 60)
-
-    elif mode == 4:
-        feed_scanner(bot)
-        time.sleep(60)
-        follow_protocol(bot)
-        time.sleep(10 * 60)
-
-    elif mode == 5:
-        bot.bot_mode = 2
-        unfollow_protocol(bot)
-
-    else:
-        print("Wrong mode!")
+    
+    bot.new_auto_mod()
