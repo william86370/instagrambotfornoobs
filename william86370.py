@@ -14,7 +14,7 @@ from unfollow_protocol import unfollow_protocol
 
 bot = InstaBot(
                login="william86370",
-               password="will86370",
+               password="password",
                like_per_day=0,
                comments_per_day=0,
                tag_list=['newbygains', 'fitness', '24hourfitness','gym','gains','armday','eatclean','healthylife','legday','chestday'],
